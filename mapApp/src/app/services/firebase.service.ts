@@ -15,6 +15,10 @@ export class FirebaseService {
   constructor(private db: AngularFireDatabase, 
     private storage: AngularFireStorage) { }
 
+    setCurrentLocation(location: Location) {
+      this.currentLocation = location;
+    }
+
     getLocationsList() {
       return this.locationListRef;
     }
