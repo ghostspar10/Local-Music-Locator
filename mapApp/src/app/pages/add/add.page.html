@@ -2,18 +2,25 @@
   <ion-toolbar>
     <ion-title>Add Locations</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/login"></ion-back-button>
+      <ion-back-button defaultHref="/login">Back</ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <ion-button (click)="addLocation(location)" routerLink="../home"
+  routerDirection="forward">Save Changes</ion-button>
+  <ion-button block clear (click)="deleteLocation(location)" routerLink="../home"
+  routerDirection="forward">Delete</ion-button>
+
   <ion-item>
     <ion-label>
       Location title:
     </ion-label>
     <ion-input [(ngModel)]="location.title" placeholder="title...."></ion-input>
   </ion-item>
+
   <ion-item>
     <ion-label>
       Location content:

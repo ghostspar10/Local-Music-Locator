@@ -19,7 +19,11 @@ export class FirebaseService {
       this.currentLocation = location;
     }
 
-    getLocationsList() {
+    getCurrentLocation() {
+      return this.currentLocation;
+    }
+
+    getLocationList() {
       return this.locationListRef;
     }
 
@@ -27,11 +31,11 @@ export class FirebaseService {
       return this.locationListRef.push(location);
     }
 
-    editLocations(location: Location) {
+    editLocation(location: Location) {
       return this.locationListRef.update(location.key, location);
     }
 
-    deleteLocations(location: Location) {
+    deleteLocation(location: Location) {
       return this.locationListRef.remove(location.key);
     }
 }

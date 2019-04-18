@@ -34,6 +34,7 @@ firebase.initializeApp(environment.firebase);
     FirebaseService,
     Camera,
     Geolocation,
+    Storage,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

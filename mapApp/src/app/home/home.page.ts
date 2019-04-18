@@ -23,10 +23,9 @@ export class HomePage implements OnInit {
 
   constructor(private router: Router, 
     private geolocation: Geolocation, 
-    private storage: Storage,
-    private firebaseService: FirebaseService) { 
+    public firebaseService: FirebaseService) { 
       this.locationsList$ = 
-      this.firebaseService.getLocationsList().snapshotChanges().map(changes => {
+      this.firebaseService.getLocationList().snapshotChanges().map(changes => {
         return changes.map(c=> ({
           key: c.payload.key, ...c.payload.val()
         }))
@@ -36,13 +35,13 @@ export class HomePage implements OnInit {
   ngOnInit() {
     let mapOptions = {
       zoom: 10,
-      mapTypeId: google.maps.MayTypeId.ROADMAP,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
       mapTypeControl: false,
       streetViewControl: false,
       fullScreenControl: false
     }
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-    this.firebaseService.getLocationsList().valueChanges().subscribe(res => {
+    this.firebaseService.getLocationList().valueChanges().subscribe(res => {
       for (let item of res) {
         this.addMarker(item);
         this.position = new google.maps.LatLng(item.latitude, item.longitude);
