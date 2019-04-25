@@ -1,8 +1,7 @@
 export interface Location {
     key?: string,
-    content: string,
+    artist: string,
+    link: string
     latitude: number,
     longitude: number,
-    title: string,
-    picture: string;
 }

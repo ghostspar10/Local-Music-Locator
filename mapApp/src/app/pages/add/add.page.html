@@ -16,25 +16,32 @@
 
   <ion-item>
     <ion-label>
-      Location title:
+      Artist:
     </ion-label>
-    <ion-input [(ngModel)]="location.title" placeholder="title...."></ion-input>
+    <ion-input [(ngModel)]="location.artist" placeholder="Artist..."></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label>
-      Location content:
+      Link to Song:
     </ion-label>
-    <ion-input [(ngModel)]="location.content" placeholder="title...."></ion-input>
+    <ion-input [(ngModel)]="location.link" placeholder="Song Link..."></ion-input>
   </ion-item>
 
-  <ion-card>
-    <ion-button size="large" (click)="openCamera()">Take Picture</ion-button>
-    <ion-card-content>
-      Picture:
-      <img [src]="base64Image" *ngIf="base64Image"/>
-    </ion-card-content>
-  </ion-card>
+  <ion-item>
+    <ion-label>
+      Latitude:
+    </ion-label>
+    <ion-input [(ngModel)]="location.latitude" placeholder="Latitude..."></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>
+      Longitude:
+    </ion-label>
+    <ion-input [(ngModel)]="location.longitude" placeholder="Longitude..."></ion-input>
+  </ion-item>
+
 
     <ion-button size="large" (click)="addLocation(location)" 
     routerLink="../home" routerDirection="forward">Add Location and Content</ion-button>
