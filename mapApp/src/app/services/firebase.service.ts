@@ -9,10 +9,10 @@ import 'firebase/storage';
   providedIn: 'root'
 })
 export class FirebaseService {
-  private locationListRef = this.db.list<Location>('Artists');
+  private locationListRef = this.db.list<Location>('artistData');
   public currentLocation: Location;
 
-  constructor(private db: AngularFireDatabase, 
+  constructor(private db: AngularFireDatabase,
     private storage: AngularFireStorage) { }
 
     setCurrentLocation(location: Location) {
