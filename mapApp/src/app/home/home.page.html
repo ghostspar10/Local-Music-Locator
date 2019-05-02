@@ -11,9 +11,12 @@
 
 <ion-content>
   <div #map id="map"></div>
+  <ion-button size="large" (click)="recommendMusic">Recommend Music</ion-button>
   <ion-list>
     <ion-list-header>
+      <font size="12">
       Locations:
+      </font>
     </ion-list-header>
     <ion-item *ngFor="let location of locationsList$ | async" (click)="assignLocation(location)"
       [routerLink]="['/list', locationTitle]" routerDirection="forward">
