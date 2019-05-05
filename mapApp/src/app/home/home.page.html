@@ -8,13 +8,14 @@
 </style>
 
 <ion-header>
-  <ion-toolbar color="tertiary">
-    <ion-title>
-      Map
-    </ion-title>
+  <ion-toolbar color="tertiary" text-center>
+    <ion-title>Map</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/login">Back</ion-back-button>
+      <ion-button routerLink="../login" style="font-size: 20px">Dash<br>&#171;</ion-button>
     </ion-buttons>
+    <ion-buttons slot="end">
+        <ion-button routerLink="/add" style="font-size: 20px">Add<br>&#187;</ion-button>
+      </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -26,11 +27,11 @@
   <div class="body">
   <ion-list class="Width">
     <ion-list-header>
-      Locations:
+      Artists:
     </ion-list-header>
     <ion-item *ngFor="let location of locationsList$ | async" (click)="assignLocation(location)"
-      [routerLink]="['/list', locationTitle]" routerDirection="forward">
-      {{location.title}}
+      [routerLink]="['/list', artistName]" routerDirection="forward">
+      {{location.artist}}
     </ion-item>
   </ion-list>
   </div>

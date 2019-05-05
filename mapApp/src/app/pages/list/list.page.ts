@@ -12,22 +12,15 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ListPage implements OnInit {
   public LocationKey: string;
-  public base64Image: string;
-  location: Location = {
-    artist: '',
-    link: '',
-    latitude: 0,
-    longitude: 0,
-  }
+  public location: Location;
 
-  constructor(private activatedRoute: ActivatedRoute,private geolocation: Geolocation, private camera: Camera,
+  constructor(private activatedRoute: ActivatedRoute, private geolocation: Geolocation, private camera: Camera,
     public firebaseService: FirebaseService) {
       this.location = this.firebaseService.getCurrentLocation();
     }
 
   ngOnInit() {
     console.log("Got: " + this.activatedRoute.snapshot.paramMap.get('locationTitle'));
-    //this.base64Image = this.location.picture;
   }
 
   editLocation(location: Location) {

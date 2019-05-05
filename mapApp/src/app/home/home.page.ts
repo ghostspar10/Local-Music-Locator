@@ -16,10 +16,12 @@ declare var google;
 export class HomePage implements OnInit {
   @ViewChild('map') mapElement: ElementRef;
   public base64Image: string;
+  currentLoc:  Location;
+  locationKey: string;
   locationsList$: Observable<Location[]>;
   map: any;
   position: any;
-  public locationTitle: string;
+  public artistName: string;
 
   constructor(private router: Router, 
     private geolocation: Geolocation, 
@@ -49,6 +51,15 @@ export class HomePage implements OnInit {
       }
     });
   }
+
+  onContextChange(ctxt: string): void {
+    this.locationsList$ = this.firebaseService.getLocationList().snapshotChanges().map(changes => {
+      return changes.map( c=> ({
+        key:  c.payload.key, ...c.payload.val()
+      }));
+    });
+  }
+
   addMarker(location: any) {
     let latLng = new google.maps.LatLng(location.latitude, location.longitude);
     let marker = new google.maps.Marker({
@@ -59,14 +70,22 @@ export class HomePage implements OnInit {
 
     this.addInfoWindow(marker, location);
   }
+
+  assignLocation(loc: Location) {
+    this.firebaseService.setCurrentLocation(loc);
+    this.currentLoc = loc;
+    this.locationKey = loc.key;
+    this.artistName = loc.artist;
+    console.log("Assigned location key: " + this.locationKey);
+  }
+
   addInfoWindow(marker, location) {
     let contentString = '<div class="info-window" id="clickableItem" >' +
-      '<h3>' + location.title + '<h3>' + 
+      '<h3>' + location.artist + '<h3>' + 
       '<div class="info-content">' +
-      '<img src="' + location.picture + '" style="width: 30px; height: 30px; border-radius: 50%; padding: 20px, 20px, 20px, 20px;">' +
-      '<p>' + location.content + '</p>'+
+      '<p>' + location.link + '</p>'+
       '</div>' +
-      '</div';
+      '</div>';
 
       let infoWindow = new google.maps.InfoWindow({
         content: contentString,
@@ -77,13 +96,16 @@ export class HomePage implements OnInit {
         var clickableItem = document.getElementById('clickableItem');
         clickableItem.addEventListener('click', () => {
           this.firebaseService.setCurrentLocation(location);
-          this.locationTitle = location.title;
-          this.router.navigate(['/list', this.locationTitle]);
+          this.artistName = location.artist;
+          this.router.navigate(['/list', this.artistName]);
         });
       });
 
       google.maps.event.addListener(marker, 'click', () => {
+        infoWindow.open(this.map, marker);
+      });
+      google.maps.event.addListener(this.map, 'click', () => {
         infoWindow.close(this.map, marker);
-      })
+      });
   }
 }
