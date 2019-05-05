@@ -59,11 +59,11 @@
   }
 
   .Two {
-    background: linear-gradient(20deg, #c7fafc, #39AFD0)
+    background: linear-gradient(20deg, #CDB2FF, #16CCBA)
   }
 
   .Three {
-    background: linear-gradient(340deg, #FBBCFF, #cf48c3)
+    background: linear-gradient(340deg, #CDB2FF, #16CCBA)
   }
 
   .Four {
@@ -72,7 +72,7 @@
 
   .Height1 {
     height: 100%;
-    background: linear-gradient(20deg, #e3e3ff, #caffd4)
+    background: linear-gradient(25deg, #cceeff, #FFFFFF)
   }
 
   .Height2 {
@@ -92,7 +92,7 @@
 </style>
 
 <ion-header>
-    <ion-toolbar color="secondary" text-center>
+    <ion-toolbar color="warning" text-center>
       <ion-title style="text-align:center">Edit Artist</ion-title>
       <ion-buttons slot="start">
         <ion-button routerLink="../../home" style="font-size: 20px">Map<br>&#171;</ion-button>
@@ -103,7 +103,7 @@
     </ion-toolbar>
   </ion-header>
 
-<ion-content>
+<ion-content color="light">
   <div class="Height1">
     <button id="buttonMain" class="Three" (click)="editLocation(location)" routerLink="../../home"
       routerDirection="forward">SAVE<BR>CHANGES</button>
