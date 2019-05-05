@@ -27,6 +27,9 @@
   --ion-color-tertiary-shade: #633ce0;
   --ion-color-tertiary-tint: #7e57ff;
 
+  /** radial **/
+  --ion-color-radial: radial-gradient(#FFFC57, #FFF0C7);
+
   /** success **/
   --ion-color-success: #10dc60;
   --ion-color-success-rgb: 16, 220, 96;
@@ -60,15 +63,15 @@
   --ion-color-dark-tint: #383a3e;
 
   /** medium **/
-  --ion-color-medium: #989aa2;
+  --ion-color-medium: radial-gradient(#FFFFFF, #FFFEDE);
   --ion-color-medium-rgb: 152, 154, 162;
-  --ion-color-medium-contrast: #ffffff;
+  --ion-color-medium-contrast: radial-gradient(#FFFBAB, #FFFFFF, #FFFFFF);
   --ion-color-medium-contrast-rgb: 255, 255, 255;
   --ion-color-medium-shade: #86888f;
   --ion-color-medium-tint: #a2a4ab;
 
   /** light **/
-  --ion-color-light: #f4f5f8;
+  --ion-color-light: linear-gradient(25deg, #cceeff, #FFFFFF);
   --ion-color-light-rgb: 244, 244, 244;
   --ion-color-light-contrast: #000000;
   --ion-color-light-contrast-rgb: 0, 0, 0;
