@@ -15,7 +15,6 @@ declare var google;
 })
 export class HomePage implements OnInit {
   @ViewChild('map') mapElement: ElementRef;
-  public base64Image: string;
   currentLoc:  Location;
   locationKey: string;
   locationsList$: Observable<Location[]>;
@@ -25,7 +24,7 @@ export class HomePage implements OnInit {
 
   constructor(private router: Router, 
     private geolocation: Geolocation, 
-    public firebaseService: FirebaseService) { 
+    public firebaseService: FirebaseService) {
       this.locationsList$ = 
       this.firebaseService.getLocationList().snapshotChanges().map(changes => {
         return changes.map(c=> ({

@@ -2,54 +2,100 @@
   #body {
     background-color: linear-gradient(45deg, #ffb900, #fb00ff)
   }
+
   #buttonMain1 {
-    margin: 2%;
-    margin-right: 1%;
+    margin-top: 10px;
+    margin-right: 10px;
     width: 47%;
     height: 100%;
-    //min-height: 400px;
-    border-radius:2em;
+    max-width: 200px;
+    min-height: 100px;
+    border-radius: 10px;
     color: white;
     font-family: Arial Black;
-    font-size: 170%
+    font-size: 170%;
+    outline: none;
   }
+
+  #buttonMain1:active {
+    background: linear-gradient(0deg, rgb(4, 32, 68), rgb(23, 45, 73))
+  }
+
   #buttonMain2 {
-    margin: 2%;
-    margin-left: 1%;
+    margin-top: 10px;
     width: 47%;
     height: 100%;
-    //min-height: 400px;
-    border-radius:2em;
+    max-width: 200px;
+    min-height: 100px;
+    border-radius: 10px;
     color: white;
     font-family: Arial Black;
-    font-size: 170%
+    font-size: 170%;
+    outline: none;
   }
+
+  #buttonMain2:active {
+    background: linear-gradient(0deg, #0d5c27, #266e3e);
+  }
+
   #buttonSecondary {
-    margin: 2%;
-    margin-top: 4%;
+    margin-top: 20px;
     width: 96%;
+    max-width: 410px;
     height: 100%;
-    //min-height: 300px;
-    border-radius:2em;
+    max-height: 120px;
+    border-radius: 10px;
     color: white;
     font-family: Arial Black;
-    font-size: 200%
+    font-size: 200%;
+    outline: none;
   }
+
+  #buttonSecondary:active {
+    background: linear-gradient(0deg, rgb(34, 4, 53), rgb(84, 42, 87))
+  }
+
   .One {
-  background: linear-gradient(0deg, #2D74D1, #FFFFFF)
+    background: linear-gradient(0deg, #2D74D1, rgb(107, 136, 173))
   }
+
   .Two {
-  background: linear-gradient(0deg, #3f8c59, #FFFFFF)
+    background: linear-gradient(0deg, #3f8c59, #638b71)
   }
+
   .Three {
-  background: linear-gradient(180deg, #E7CAF9, #FBBCFF, #FFFFFF)
+    background: linear-gradient(0deg, rgb(70, 27, 97), rgb(188, 131, 192))
   }
+
   .Height1 {
-    height: 60%
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    height: 100px
   }
+
   .Height2 {
-    height: 30%
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    height: 100px
   }
+
+  .Height3 {
+    margin-top: 20px;
+    text-align: center;
+    display: block;
+    height: 10%;
+  }
+
+  .Width {
+    padding-left: 4px;
+    text-align: left;
+    width: 410px;
+    margin: 30px auto 0px auto;
+    font-size: 16px;
+  }
+
 </style>
 
 <ion-header>
@@ -58,13 +104,30 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-<body id="body">
-<div class="Height1">
-  <button id="buttonMain1" class="One" routerLink="../home" routerDirection="forward">MAP</button>
-  <button id="buttonMain2" class="Two" routerLink="/add" routerDirection="forward">ADD</button>
-</div>
-<div class="Height2">
-  <button id="buttonSecondary" class="Three" routerLink="/rec" routerDirection="forward">NEAR ME</button>
-</div>
-</body>
+
+  <body id="body">
+    <div class="Height1">
+      <button id="buttonMain1" class="One" routerLink="../home" routerDirection="forward">MAP</button>
+      <button id="buttonMain2" class="Two" routerLink="/add" routerDirection="forward">ADD</button>
+    </div>
+
+    <div class="Height2">
+      <button id="buttonSecondary" class="Three" (click)="recommendMusic()">FIND NEAREST<br>ARTIST</button>
+    </div>
+
+    <div class="Height3">
+      <ion-card class="Width">
+        <ion-text id="text1">
+          <h1>Artist:</h1>
+        </ion-text>
+
+        <ion-text id="text2">
+          <h1>Song:</h1>
+        </ion-text>
+  
+      </ion-card>
+    </div>
+  </body>
+
+  
 </ion-content>
