@@ -12,6 +12,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  public video: String;
+  public YT: any;
+  public player: any;
+  public playing: boolean = false;
+
   locationKey: string;
   locationsList$: Observable<Location[]>;
   result: number;
@@ -43,14 +48,35 @@ export class LoginPage implements OnInit {
         }))
       })
 
-      var temp = this;
+    var temp = this;
 
     setInterval(function () {
       temp.findNearest();
     }, 1000);
   }
 
+  init() {
+    var tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  }
+
   ngOnInit() {
+
+    this.init();
+    this.video = 'P196hEuA_Xc'
+
+    window['onYouTubeIframeAPIReady'] = (e) => {
+      this.YT = window['YT'];
+      this.player = new window['YT'].Player('player', {
+        width: '400',
+        height: '225',
+        events: {
+          'onReady': this.onPlayerReady.bind(this)
+        }
+      });
+    };
 
     this.geolocation.getCurrentPosition().then(pos => {
       this.currentLoc.latitude = pos.coords.latitude;
@@ -58,6 +84,7 @@ export class LoginPage implements OnInit {
     }).catch((error) => {
       console.log('Error getting location', error);
     });
+
 
   }
 
@@ -73,10 +100,10 @@ export class LoginPage implements OnInit {
     this.firebaseService.getLocationList().valueChanges().subscribe(res => {
       for (let item of res) {
         this.result = Math.pow((this.currentLoc.longitude - item.longitude), 2) +
-        Math.pow((this.currentLoc.latitude - item.latitude), 2);
+          Math.pow((this.currentLoc.latitude - item.latitude), 2);
 
         this.distance = Math.sqrt(this.result);
-        
+
         if (this.distance < this.newDistance) {
           this.newDistance = this.distance;
           this.recArtist.artist = item.artist;
@@ -91,6 +118,38 @@ export class LoginPage implements OnInit {
   recommendMusic() {
     console.log(this.recArtist.artist);
     document.getElementById("text1").innerHTML = "<h1>Artist: " + this.recArtist.artist + "</h1>";
+    document.getElementById("text2").innerHTML = '<h1 style="display: inline">Link: </h1>' + '<a style="display: inline;" href="' + this.recArtist.link + '">' +
+      '<p style="font-size: 14px; display: inline">' + this.recArtist.link + '</p>';
 
+    var checkSite = this.recArtist.link.substr(0, 23);
+
+    if (checkSite == "https://www.youtube.com") {
+      var tempString = this.recArtist.link.substr(32, 11);
+
+      this.player.loadVideoById(tempString, 0);
+      this.player.pauseVideo();
+      this.playing = false;
+
+      document.getElementById("playButton").disabled = false;
+      document.getElementById("playButton").style.opacity = "1";
+      document.getElementById("playButton").innerHTML = "Play Music";
+    }
+  }
+
+  onPlayerReady(event) {
+    var temp = this;
+
+    document.getElementById("playButton").addEventListener("click", function () {
+      if (!temp.playing) {
+        temp.player.playVideo();
+        document.getElementById("playButton").innerHTML = "Stop Music";
+        temp.playing = true;
+      }
+      else if (temp.playing) {
+        temp.player.pauseVideo();
+        document.getElementById("playButton").innerHTML = "Play Music";
+        temp.playing = false;
+      }
+    })
   }
 }
