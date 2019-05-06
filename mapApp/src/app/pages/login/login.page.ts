@@ -130,7 +130,7 @@ export class LoginPage implements OnInit {
       this.player.pauseVideo();
       this.playing = false;
 
-      document.getElementById("playButton").disabled = false;
+      (document.getElementById("playButton") as HTMLButtonElement).disabled = false;
       document.getElementById("playButton").style.opacity = "1";
       document.getElementById("playButton").innerHTML = "Play Music";
     }
